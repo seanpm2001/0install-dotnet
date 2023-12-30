@@ -62,6 +62,10 @@ for:
       - '$HOME/.nuget/packages -> **/*.csproj,**/*.targets,**/*.props'
 
     before_build:
+      # TODO: Remove once AppVeyor Ubuntu image includes .NET SDK 8.0
+      - curl -sSfLO https://dot.net/v1/dotnet-install.sh
+      - . dotnet-install.sh --channel 8.0
+
       - gitversion /verbosity quiet /output buildserver
 
     build_script:
